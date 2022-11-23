@@ -4,7 +4,7 @@ import "../styles/Navbar.css";
 import AddTask from "./AddTask";
 
 const Navbar = () => {
-  const { showModal, setShowModal } = useContext(MyContext);
+  const { showModal, setShowModal, user } = useContext(MyContext);
   return (
     <div className="header">
       <div className="title">
@@ -13,12 +13,14 @@ const Navbar = () => {
           alt="logo"
         />
       </div>
-      <div className="navbar_content">
-        <h2>Platform Launch</h2>
-        <button className="add_Btn_header" onClick={() => setShowModal(true)}>
-          + Add New task
-        </button>
-      </div>
+      {user && (
+        <div className="navbar_content">
+          <h2>Platform Launch</h2>
+          <button className="add_Btn_header" onClick={() => setShowModal(true)}>
+            + Add New task
+          </button>
+        </div>
+      )}
       <AddTask show={showModal} onHide={() => setShowModal(false)} />
     </div>
   );

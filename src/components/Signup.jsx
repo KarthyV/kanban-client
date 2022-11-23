@@ -34,6 +34,7 @@ const SignUp = () => {
             value={values.email}
             name="email"
           />
+          <p> {errors.email && touched.email ? errors.email : null}</p>
         </div>
         <div className="fieldBox">
           <label>Password</label>
@@ -45,6 +46,7 @@ const SignUp = () => {
             value={values.password}
             name="password"
           />
+          <p> {errors.password && touched.password ? errors.password : null}</p>
         </div>
 
         <button type="submit">SignUp</button>
