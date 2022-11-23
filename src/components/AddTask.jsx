@@ -1,25 +1,44 @@
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "../styles/AddTask.css";
+import * as yup from "yup";
 
+const formValidationSchema = yup.object({
+  title: yup.string().required("Title is required"),
+  subTasks: yup.array().of(yup.string().required("Cannot be empty")).required(),
+});
 const AddTask = (props) => {
   const [inputFields, setInputFields] = useState([""]);
-  const [steps, setSteps] = useState([]);
+  const [subTasks, setSubTasks] = useState([]);
+
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
+    useFormik({
+      initialValues: {
+        title: "",
+        description: "",
+        subTasks: subTasks,
+        status: "Todo",
+      },
+      validationSchema: formValidationSchema,
+      onSubmit: (values) => console.log(values),
+    });
   function addInputField(e) {
     console.log(e);
+    console.log(errors);
     e.preventDefault();
     setInputFields((inputFields) => [...inputFields, ""]);
-    setSteps((steps) => [...steps, ""]);
+    setSubTasks((subTasks) => [...subTasks, ""]);
   }
 
   function removeInputField(index, e) {
     e.preventDefault();
     const copyInputField = [...inputFields];
     copyInputField.splice(index, 1);
-    const stepsCopy = [...steps];
-    values.steps.splice(index, 1);
-    stepsCopy.splice(index, 1);
-    setSteps(stepsCopy);
+    const subTasksCopy = [...subTasks];
+    values.subTasks.splice(index, 1);
+    subTasksCopy.splice(index, 1);
+    setSubTasks(subTasksCopy);
     setInputFields(copyInputField);
   }
   return (
@@ -28,14 +47,27 @@ const AddTask = (props) => {
         <Modal.Title id="contained-modal-title-vcenter">Add Task</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <form className="addNewTask_form">
+        <form onSubmit={handleSubmit} className="addNewTask_form">
           <div className="addTask_fieldBox">
             <label>Title</label>
-            <input type="text" required />
+            <input
+              type="text"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.title}
+              name="title"
+            />
+            <p> {errors.title && touched.title ? errors.title : null}</p>
           </div>
           <div className="addTask_fieldBox">
             <label>Description</label>
-            <input type="text" required />
+            <input
+              type="text"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.description}
+              name="description"
+            />
           </div>
           <div className="addTask_fieldBox">
             <label>SubTasks</label>
@@ -43,12 +75,12 @@ const AddTask = (props) => {
               return (
                 <div className="addSubTask" key={index}>
                   <input
-                    // name={`steps[${index}]`}
+                    name={`subTasks[${index}]`}
                     placeholder="Add SubTasks"
                     type="text"
-                    // onChange={handleChange}
-                    // onBlur={handleBlur}
-                    // value={values.steps[index]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.subTasks[index]}
                     required
                   />
                   <button
@@ -57,7 +89,11 @@ const AddTask = (props) => {
                   >
                     <i className="fa-solid fa-trash"></i>
                   </button>
-                  {/* <p>{errors.steps && touched.steps ? errors.steps : null}</p> */}
+                  <p>
+                    {errors.subTasks && touched.subTasks
+                      ? errors.subTasks
+                      : null}
+                  </p>
                 </div>
               );
             })}
@@ -71,13 +107,22 @@ const AddTask = (props) => {
           </div>
           <div className="addTask_fieldBox">
             <label>Status</label>
-            <select name="status" id="status">
+            <select
+              value={values.status}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="status"
+              id="status"
+            >
               <option value="Todo">Todo</option>
               <option value="Doing">Doing</option>
               <option value="Done">Done</option>
             </select>
+            <p> {errors.status && touched.status ? errors.status : null}</p>
           </div>
-          <button className="TaskSubmit_Btn">Create Task</button>
+          <button type="submit" className="TaskSubmit_Btn">
+            Create Task
+          </button>
         </form>
       </Modal.Body>
     </Modal>
