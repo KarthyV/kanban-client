@@ -42,6 +42,9 @@ const Sidebar = () => {
           </button>
           <i class="fa-solid fa-moon"></i>
         </div>
+        <button className="sideBar_top_features logout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
       </div>
     </div>
   );

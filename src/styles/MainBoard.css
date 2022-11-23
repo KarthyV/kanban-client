@@ -64,6 +64,12 @@
   color: #635fc7;
 }
 
+.logout {
+  color: #fff;
+  background-color: red;
+  justify-content: center;
+}
+
 .sideBar_top_features:hover {
   background-color: #635fc7;
   opacity: 1;
