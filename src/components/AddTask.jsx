@@ -6,6 +6,7 @@ const AddTask = (props) => {
   const [inputFields, setInputFields] = useState([""]);
   const [steps, setSteps] = useState([]);
   function addInputField(e) {
+    console.log(e);
     e.preventDefault();
     setInputFields((inputFields) => [...inputFields, ""]);
     setSteps((steps) => [...steps, ""]);
@@ -39,27 +40,33 @@ const AddTask = (props) => {
           <div className="addTask_fieldBox">
             <label>SubTasks</label>
             {inputFields.map((input, index) => {
-              <div key={index}>
-                <input
-                  // name={`steps[${index}]`}
-                  placeholder="Add SubTasks"
-                  type="text"
-                  // onChange={handleChange}
-                  // onBlur={handleBlur}
-                  // value={values.steps[index]}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={(e) => removeInputField(index, e)}
-                >
-                  <i className="fa-solid fa-trash"></i>
-                </button>
-                {/* <p>{errors.steps && touched.steps ? errors.steps : null}</p> */}
-              </div>;
+              return (
+                <div className="addSubTask" key={index}>
+                  <input
+                    // name={`steps[${index}]`}
+                    placeholder="Add SubTasks"
+                    type="text"
+                    // onChange={handleChange}
+                    // onBlur={handleBlur}
+                    // value={values.steps[index]}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => removeInputField(index, e)}
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                  {/* <p>{errors.steps && touched.steps ? errors.steps : null}</p> */}
+                </div>
+              );
             })}
-            <button onClick={addInputField} type="button">
-              <i className="fa-solid fa-plus"></i>
+            <button
+              className="add_subTask_Btn"
+              onClick={addInputField}
+              type="button"
+            >
+              <i className="fa-solid fa-plus"></i> Add Sub Task
             </button>
           </div>
           <div className="addTask_fieldBox">
@@ -70,11 +77,9 @@ const AddTask = (props) => {
               <option value="Done">Done</option>
             </select>
           </div>
+          <button className="TaskSubmit_Btn">Create Task</button>
         </form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 };
