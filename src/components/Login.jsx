@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { MyContext } from "../context";
 
 const formValidationSchema = yup.object({
   email: yup.string().email().required(),
@@ -9,6 +10,7 @@ const formValidationSchema = yup.object({
 });
 const Login = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(MyContext);
 
   const { values, handleChange, handleBlur, touched, handleSubmit, errors } =
     useFormik({
@@ -19,6 +21,8 @@ const Login = () => {
       validationSchema: formValidationSchema,
       onSubmit: (values) => {
         console.log(values);
+        setUser(true);
+        navigate("/");
       },
     });
   return (

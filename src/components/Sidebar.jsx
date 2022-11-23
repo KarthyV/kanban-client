@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Nav } from "react-bootstrap";
+import { MyContext } from "../context";
 
 const Sidebar = () => {
   const [toggled, setToggled] = useState(false);
+  const { user, setUser } = useContext(MyContext);
+  const handleLogOut = () => {
+    setUser(false);
+    navigate("/login");
+  };
   return (
     <div className="sideBar">
       <div className="sideBar_top">
@@ -42,7 +48,7 @@ const Sidebar = () => {
           </button>
           <i class="fa-solid fa-moon"></i>
         </div>
-        <button className="sideBar_top_features logout">
+        <button className="sideBar_top_features logout" onClick={handleLogOut}>
           <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
         </button>
       </div>

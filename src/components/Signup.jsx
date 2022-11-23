@@ -9,6 +9,7 @@ const formValidationSchema = yup.object({
 });
 const SignUp = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(MyContext);
 
   const { values, handleChange, handleBlur, touched, handleSubmit, errors } =
     useFormik({
@@ -19,6 +20,8 @@ const SignUp = () => {
       validationSchema: formValidationSchema,
       onSubmit: (values) => {
         console.log(values);
+        setUser(true);
+        navigate("/");
       },
     });
   return (
