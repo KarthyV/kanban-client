@@ -1,0 +1,8 @@
+.addTask_modal_container {
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: #2b2c37;
+  color: #fff;
+}
