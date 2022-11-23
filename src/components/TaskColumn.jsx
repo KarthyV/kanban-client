@@ -7,7 +7,7 @@ const TaskColumn = () => {
     <div className="column">
       <div className="column_header">
         <span className="column_header_dot"></span>
-        <span className="column_header_title"></span>
+        <span className="column_header_title">TODO (3)</span>
       </div>
       <div className="task_cards_cont">
         {[...Array(10)].map((each, index) => {
