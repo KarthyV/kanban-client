@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Sidebar = () => {
+  const [toggled, setToggled] = useState(false);
   return (
     <div className="sideBar">
       <div className="sideBar_top">
@@ -16,11 +17,25 @@ const Sidebar = () => {
             <i className="fa-solid fa-border-all"></i>Roadmap
           </button>
         </div>
-        <button className="sideBar_top_createBtn">
+        <button className="sideBar_top_features createBtn">
           <i className="fa-solid fa-border-all"></i>+ Create New Board
         </button>
       </div>
-      <div className="sideBar_bottom"></div>
+      <div className="sideBar__bottom">
+        <div className="sideBar__theme">
+          <i class="fa-solid fa-sun"></i>
+          <button
+            onClick={() => setToggled(!toggled)}
+            className="sideBar__theme_toggle"
+          >
+            <span
+              className="sideBar__theme_toggle_ball"
+              style={toggled ? { right: "10%" } : { left: "10%" }}
+            ></span>
+          </button>
+          <i class="fa-solid fa-moon"></i>
+        </div>
+      </div>
     </div>
   );
 };
