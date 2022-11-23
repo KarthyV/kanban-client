@@ -1,8 +1,9 @@
 .mainBoard {
-  flex: 1;
   display: flex;
   width: 100%;
   height: 100%;
+  background: #20212c;
+  position: relative;
 }
 
 .sideBar {
@@ -15,8 +16,10 @@
   font-weight: 700;
   min-width: 18rem;
   height: 90vh;
+  left: 0;
   z-index: 1;
   padding: 2rem 0;
+  border-right: 1px solid #3e3f4e;
 }
 
 .sideBar_top_title {
@@ -98,5 +101,50 @@
 }
 
 .taskBoard {
-  flex: 1;
+  background: #20212c;
+  position: absolute;
+  left: 18rem;
+  min-width: 100%;
+  height: 90vh;
+  padding: 2rem;
+  color: #fff;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
+  width: 17.5rem;
+  height: 100%;
+  color: #fff;
+}
+
+.column_header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #828fa3;
+}
+
+.column_header_dot {
+  display: flex;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  margin-right: 12px;
+}
+
+.card_container {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  width: 100%;
+  height: 5rem;
+  background-color: #2b2c37;
+  padding: 1.5rem;
+  margin-bottom: 15px;
 }
