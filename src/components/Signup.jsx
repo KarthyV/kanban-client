@@ -10,7 +10,7 @@ const formValidationSchema = yup.object({
 });
 const SignUp = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(MyContext);
+  const { user, setUser, setIsAuthenticated } = useContext(MyContext);
 
   const { values, handleChange, handleBlur, touched, handleSubmit, errors } =
     useFormik({
@@ -31,7 +31,7 @@ const SignUp = () => {
         const userRes = await res.json();
         if (res.status == 200 || res.status == 201) {
           setUser(userRes);
-
+          setIsAuthenticated(true);
           localStorage.setItem("user", JSON.stringify(userRes));
           console.log(userRes);
           navigate("/");

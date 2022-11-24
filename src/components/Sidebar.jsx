@@ -1,13 +1,28 @@
 import React, { useContext, useState } from "react";
 import { Nav } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { API } from "../api";
 import { MyContext } from "../context";
 
 const Sidebar = () => {
   const [toggled, setToggled] = useState(false);
   const { user, setUser } = useContext(MyContext);
-  const handleLogOut = () => {
-    setUser(false);
-    navigate("/login");
+  const navigate = useNavigate();
+  const handleLogOut = async (e) => {
+    e.preventDefault();
+    const res = await fetch(`${API}/users/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    if (res.status == 200) {
+      setUser("");
+      localStorage.clear();
+      navigate("/login");
+    }
   };
   return (
     <div className="sideBar">

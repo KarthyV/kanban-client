@@ -11,9 +11,12 @@ import { MyContext } from "./context";
 
 function App() {
   const navigate = useNavigate();
-  const { user } = useContext(MyContext);
+  const { user, setUser, setIsAuthenticated } = useContext(MyContext);
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")));
+      setIsAuthenticated(true);
+    } else navigate("/login");
   }, []);
 
   return (
