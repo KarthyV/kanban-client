@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { API } from "../api";
 import { MyContext } from "../context";
 
 const formValidationSchema = yup.object({
@@ -19,10 +20,25 @@ const Login = () => {
         password: "",
       },
       validationSchema: formValidationSchema,
-      onSubmit: (values) => {
-        console.log(values);
-        setUser(true);
-        navigate("/");
+      onSubmit: async (values) => {
+        const res = await fetch(`${API}/users/login`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const userRes = await res.json();
+        console.log(userRes);
+        if (res.status == 200 || res.status == 201) {
+          setUser(userRes);
+
+          localStorage.setItem("user", JSON.stringify(userRes));
+          navigate("/");
+        } else {
+          alert(userRes.message);
+        }
       },
     });
   return (
@@ -51,9 +67,9 @@ const Login = () => {
             name="password"
           />
           <p> {errors.password && touched.password ? errors.password : null}</p>
-          {/* <p className="forget_pass">
+          <p className="forget_pass">
             <Link to="/forget-password">Forget Password?</Link>
-          </p> */}
+          </p>
         </div>
         <button type="submit">Login</button>
       </form>

@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import "../styles/AddTask.css";
+import { Modal } from "react-bootstrap";
 import * as yup from "yup";
+import "../styles/AddTask.css";
 
 const formValidationSchema = yup.object({
   title: yup.string().required("Title is required"),

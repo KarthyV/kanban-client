@@ -41,3 +41,40 @@
   font-size: 1rem;
   border: none;
 }
+
+.navbar_content_mobile {
+  display: none;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.launch_mobile {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: #fff;
+  gap: 5px;
+}
+
+@media (max-width: 767px) {
+  .header {
+    border-bottom: 1px solid #3e3f4e;
+  }
+  .title {
+    width: 4rem;
+    border-right: none;
+    border-bottom: none;
+  }
+  .navbar_content_mobile {
+    display: flex;
+    /* border-bottom: 1px solid #3e3f4e; */
+    height: 100%;
+  }
+  .add_Btn_header {
+    padding: 0 1rem;
+    justify-content: center;
+  }
+}

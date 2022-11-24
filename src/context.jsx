@@ -3,11 +3,14 @@ import React, { createContext, useState } from "react";
 export const MyContext = createContext("");
 
 const AppContext = ({ children }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAdd, setShowMAdd] = useState(false);
+  const [showMobile, setShowMobile] = useState(false);
   const [user, setUser] = useState("");
 
   return (
-    <MyContext.Provider value={{ showModal, setShowModal, user, setUser }}>
+    <MyContext.Provider
+      value={{ showAdd, setShowMAdd, showMobile, setShowMobile, user, setUser }}
+    >
       {children}
     </MyContext.Provider>
   );

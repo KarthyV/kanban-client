@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../context";
+import { API } from "../api";
 const formValidationSchema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
@@ -18,10 +19,25 @@ const SignUp = () => {
         password: "",
       },
       validationSchema: formValidationSchema,
-      onSubmit: (values) => {
-        console.log(values);
-        setUser(true);
-        navigate("/");
+      onSubmit: async (values) => {
+        const res = await fetch(`${API}/users/signup`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const userRes = await res.json();
+        if (res.status == 200 || res.status == 201) {
+          setUser(userRes);
+
+          localStorage.setItem("user", JSON.stringify(userRes));
+          console.log(userRes);
+          navigate("/");
+        } else {
+          alert(userRes.message);
+        }
       },
     });
   return (
