@@ -16,6 +16,7 @@
   padding: 2rem 3rem;
   border-right: 1px solid #3e3f4e;
   border-bottom: 1px solid #3e3f4e;
+  cursor: pointer;
 }
 
 .navbar_content {

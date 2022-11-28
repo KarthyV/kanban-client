@@ -7,6 +7,7 @@ import MainBoard from "./components/MainBoard";
 import Navbar from "./components/Navbar";
 import ResetPass from "./components/ResetPass";
 import SignUp from "./components/Signup";
+import Subscriptions from "./components/Subscriptions";
 import { MyContext } from "./context";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forget-password" element={<ForgetPass />} />
         <Route path="/reset-password/:id" element={<ResetPass />} />
+        <Route path="/subscriptions/:id" element={<Subscriptions />} />
       </Routes>
     </div>
   );

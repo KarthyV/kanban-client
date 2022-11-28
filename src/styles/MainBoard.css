@@ -7,6 +7,10 @@
   min-height: 100%;
 }
 
+.mainBoard::-webkit-scrollbar {
+  display: none;
+}
+
 .sideBar {
   display: flex;
   position: fixed;
