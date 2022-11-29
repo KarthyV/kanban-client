@@ -19,6 +19,7 @@ const AddTask = (props) => {
         description: "",
         subTasks: subTasks,
         status: "Todo",
+        category: "launch",
       },
       validationSchema: formValidationSchema,
       onSubmit: (values) => console.log(values),
@@ -58,6 +59,19 @@ const AddTask = (props) => {
               name="title"
             />
             <p> {errors.title && touched.title ? errors.title : null}</p>
+          </div>
+          <div className="addTask_fieldBox">
+            <label>Category</label>
+            <select
+              value={values.category}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="category"
+              id="category"
+            >
+              <option value="launch">Platform Launch</option>
+              <option value="marketing">Marketing Plan</option>
+            </select>
           </div>
           <div className="addTask_fieldBox">
             <label>Description</label>
@@ -118,7 +132,6 @@ const AddTask = (props) => {
               <option value="Doing">Doing</option>
               <option value="Done">Done</option>
             </select>
-            <p> {errors.status && touched.status ? errors.status : null}</p>
           </div>
           <button type="submit" className="TaskSubmit_Btn">
             Create Task

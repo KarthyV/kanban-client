@@ -37,10 +37,7 @@ const Navbar = () => {
             <h2>Platform Launch</h2>
             <i class="fa-solid fa-chevron-down"></i>
           </button>
-          <button
-            onClick={() => setShowMobile(true)}
-            className="add_Btn_header"
-          >
+          <button onClick={() => setShowAdd(true)} className="add_Btn_header">
             +
           </button>
         </div>

@@ -4,11 +4,12 @@ import { API } from "./api";
 export const MyContext = createContext("");
 
 const AppContext = ({ children }) => {
-  const [showAdd, setShowMAdd] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
   const [showMobile, setShowMobile] = useState(false);
   const [user, setUser] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showTask, setShowTask] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -34,7 +35,7 @@ const AppContext = ({ children }) => {
     <MyContext.Provider
       value={{
         showAdd,
-        setShowMAdd,
+        setShowAdd,
         showMobile,
         setShowMobile,
         user,
@@ -43,6 +44,8 @@ const AppContext = ({ children }) => {
         setIsAdmin,
         isAuthenticated,
         setIsAuthenticated,
+        setShowTask,
+        showTask,
       }}
     >
       {children}

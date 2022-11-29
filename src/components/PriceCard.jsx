@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../api";
 
 const PriceCard = (props) => {
+  const navigate = useNavigate();
   const initPayment = (data) => {
     const options = {
       key: "rzp_test_yKwUMDk8NxMZtb",
@@ -14,7 +15,6 @@ const PriceCard = (props) => {
         "https://kanban-app-jay.netlify.app/assets/logo-mobile.c1810dc7.svg",
       order_id: data.id,
       handler: async (response) => {
-        console.log(response);
         try {
           const verifyUrl = `${API}/payment/verify`;
           const res = await fetch(verifyUrl, {
@@ -23,10 +23,14 @@ const PriceCard = (props) => {
               "Content-Type": "application/json",
               Accept: "application/json",
             },
-            body: JSON.stringify({ ...response, user_id: id }),
+            body: JSON.stringify({ ...response, user_id: props.user.userId }),
           });
-          const data = await res.json();
-          console.log(data);
+
+          if (res.status == 200) {
+            navigate("/");
+          } else {
+            alert("Something went wrong, Please try again");
+          }
         } catch (error) {
           console.log(error);
         }
@@ -35,7 +39,7 @@ const PriceCard = (props) => {
         color: "#3399cc",
       },
     };
-    console.log(window.Razorpay);
+
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };

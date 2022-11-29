@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
+import EditTask from "./components/EditTask";
 import ForgetPass from "./components/ForgetPass";
 import Login from "./components/Login";
 import MainBoard from "./components/MainBoard";
@@ -29,7 +30,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forget-password" element={<ForgetPass />} />
         <Route path="/reset-password/:id" element={<ResetPass />} />
-        <Route path="/subscriptions/:id" element={<Subscriptions />} />
+        <Route path="/subscriptions" element={<Subscriptions />} />
+        <Route path="/tasks/edit/:id" element={<EditTask />} />
       </Routes>
     </div>
   );

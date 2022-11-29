@@ -39,14 +39,17 @@ const Sidebar = () => {
               <i className="fa-solid fa-border-all"></i>Marketing Plan
             </Nav.Link>
           </button>
-          <button className="sideBar_top_features">
+          {/* <button className="sideBar_top_features">
             <Nav.Link eventKey="roadmap">
               <i className="fa-solid fa-border-all"></i>Roadmap
             </Nav.Link>
-          </button>
+          </button> */}
         </div>
-        <button className="sideBar_top_features createBtn">
-          <i className="fa-solid fa-border-all"></i>+ Create New Board
+        <button
+          onClick={() => navigate("/subscriptions")}
+          className="sideBar_top_features createBtn"
+        >
+          <i className="fa-solid fa-border-all"></i>Pricing
         </button>
       </div>
       <div className="sideBar__bottom">

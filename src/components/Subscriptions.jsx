@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../api";
+import { MyContext } from "../context";
 import "../styles/Subscriptions.css";
 import PriceCard from "./PriceCard";
 
@@ -30,11 +31,11 @@ const tier = [
 ];
 
 const Subscriptions = () => {
-  const { id } = useParams();
   const [userEmail, setUserEmail] = useState("");
+  const { user } = useContext(MyContext);
 
   useEffect(() => {
-    fetch(`${API}/users/${id}`)
+    fetch(`${API}/users/${user.userId}`)
       .then((res) => res.json())
       .then((data) => setUserEmail(data));
   }, []);
@@ -44,7 +45,14 @@ const Subscriptions = () => {
         <div className="container">
           <div className="row">
             {tier.map((plan, i) => {
-              return <PriceCard userEmail={userEmail} key={i} tier={plan} />;
+              return (
+                <PriceCard
+                  user={user}
+                  userEmail={userEmail}
+                  key={i}
+                  tier={plan}
+                />
+              );
             })}
           </div>
         </div>
