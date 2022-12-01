@@ -35,7 +35,7 @@ const Login = () => {
           setUser(userRes);
           setIsAuthenticated(true);
           localStorage.setItem("user", JSON.stringify(userRes));
-          navigate("/");
+          setTimeout(() => navigate("/"), 1000);
         } else {
           alert(userRes.message);
         }

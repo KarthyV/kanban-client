@@ -1,7 +1,9 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import * as yup from "yup";
+import { API } from "../api";
+import { MyContext } from "../context";
 import "../styles/AddTask.css";
 
 const formValidationSchema = yup.object({
@@ -11,6 +13,7 @@ const formValidationSchema = yup.object({
 const AddTask = (props) => {
   const [inputFields, setInputFields] = useState([""]);
   const [subTasks, setSubTasks] = useState([]);
+  const { user, setShowAdd, darkMode } = useContext(MyContext);
 
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } =
     useFormik({
@@ -22,7 +25,23 @@ const AddTask = (props) => {
         category: "launch",
       },
       validationSchema: formValidationSchema,
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        fetch(`${API}/tasks`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify(values),
+        }).then((res) => {
+          if (res.status == 201) {
+            setInputFields([""]);
+            setSubTasks([]);
+            setShowAdd(false);
+          }
+        });
+      },
     });
   function addInputField(e) {
     console.log(e);
@@ -43,12 +62,15 @@ const AddTask = (props) => {
     setInputFields(copyInputField);
   }
   return (
-    <Modal {...props} size="lg" className="addTask_modal_container" centered>
-      <Modal.Header closeButton>
+    <Modal {...props} size="lg" className={`addTask_modal_container`} centered>
+      <Modal.Header className={`${darkMode ? "light" : ""}`} closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Add Task</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <form onSubmit={handleSubmit} className="addNewTask_form">
+      <Modal.Body className={`${darkMode ? "light" : ""}`}>
+        <form
+          onSubmit={handleSubmit}
+          className={`addNewTask_form ${darkMode ? "light" : ""}`}
+        >
           <div className="addTask_fieldBox">
             <label>Title</label>
             <input

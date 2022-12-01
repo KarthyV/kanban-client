@@ -78,4 +78,7 @@
     padding: 0 1rem;
     justify-content: center;
   }
+  .desktop {
+    display: none;
+  }
 }

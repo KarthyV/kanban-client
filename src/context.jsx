@@ -10,8 +10,21 @@ const AppContext = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showTask, setShowTask] = useState(false);
+  const [currentTask, setCurrentTask] = useState("");
+  const [showUpdate, setShowUpdate] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  // const [toggled, setToggled] = useState(false);
+  // const [tasks, setTasks] = useState([]);
+  // const [taskLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    // setLoading(true);
+    // fetch(`${API}/tasks`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setTasks(data);
+    //     setLoading(false);
+    //   });
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
       setIsAuthenticated(true);
@@ -27,7 +40,11 @@ const AppContext = ({ children }) => {
         body: JSON.stringify(user),
       })
         .then((res) => res.json())
-        .then((data) => setIsAdmin(data.isAdmin));
+        .then((data) => {
+          const res = data.isAdmin;
+          console.log(res);
+          setIsAdmin(res);
+        });
     }
   }, [isAuthenticated]);
   console.log(isAdmin);
@@ -46,6 +63,12 @@ const AppContext = ({ children }) => {
         setIsAuthenticated,
         setShowTask,
         showTask,
+        currentTask,
+        setCurrentTask,
+        showUpdate,
+        setShowUpdate,
+        darkMode,
+        setDarkMode,
       }}
     >
       {children}

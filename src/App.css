@@ -109,3 +109,52 @@
 .form_changePass > form {
   width: 100%;
 }
+
+.mobileNav {
+  display: none !important;
+}
+
+@media (max-width: 767px) {
+  .header {
+    border-bottom: 1px solid #3e3f4e;
+  }
+  .title {
+    width: 4rem;
+    border-right: none;
+    border-bottom: none;
+  }
+  .navbar_content_mobile {
+    display: flex;
+    /* border-bottom: 1px solid #3e3f4e; */
+    height: 100%;
+  }
+  .add_Btn_header {
+    padding: 0 1rem;
+    justify-content: center;
+  }
+  .desktop {
+    display: none;
+  }
+  .taskBoard {
+    left: 1rem;
+  }
+  .mobileNav {
+    display: block !important;
+    top: 3.6rem !important;
+  }
+  .mobileNav > .modal-lg {
+    width: 300px !important;
+  }
+  .sideBar_top_title {
+    font-size: 0.8rem !important;
+    color: rgb(203, 199, 199) !important;
+  }
+  .modal-header {
+    border-bottom: none !important;
+  }
+}
+
+.light {
+  background-color: whitesmoke !important;
+  color: black !important;
+}

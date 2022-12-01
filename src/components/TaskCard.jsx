@@ -3,12 +3,24 @@ import { MyContext } from "../context";
 import "../styles/MainBoard.css";
 import ViewTask from "./ViewTask";
 
-const TaskCard = ({ data }) => {
-  const { showTask, setShowTask } = useContext(MyContext);
+const TaskCard = ({ task }) => {
+  const { showTask, setShowTask, setCurrentTask, currentTask, darkMode } =
+    useContext(MyContext);
+  const handleView = () => {
+    setCurrentTask(task);
+    setShowTask(true);
+  };
   return (
-    <div onClick={() => setShowTask(true)} className="card_container">
-      <div className="card_title">{data.title}</div>
-      <div className="card_subtitle">{data.subTasks.length} subtasks</div>
+    <div
+      onClick={handleView}
+      className={`card_container ${darkMode ? "light" : ""}`}
+    >
+      <div className={`card_title ${darkMode ? "light" : ""}`}>
+        {task?.title}
+      </div>
+      <div className={`card_subtitle ${darkMode ? "light" : ""}`}>
+        {task?.subTasks.length} subtasks
+      </div>
     </div>
   );
 };

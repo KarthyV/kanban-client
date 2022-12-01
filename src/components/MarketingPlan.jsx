@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { API } from "../api";
+import { MyContext } from "../context";
 import TaskColumn from "./TaskColumn";
 import TaskDoingColumn from "./TaskDoingColumn";
 import TaskDoneColumn from "./TaskDoneColumn";
@@ -8,12 +9,13 @@ const MarketingPlan = () => {
   const [todoTasks, setTodoTasks] = useState([]);
   const [doingTasks, setDoingTasks] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
+  const { showUpdate, showAdd } = useContext(MyContext);
 
   useEffect(() => {
     fetch(`${API}/tasks/marketing`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.filter((each) => each.status == "Done").length);
+        console.log(data);
         setTodoTasks(
           data.filter((each) => each.status == "Todo").length > 0
             ? data.filter((each) => each.status == "Todo")
@@ -30,7 +32,7 @@ const MarketingPlan = () => {
             : []
         );
       });
-  }, []);
+  }, [showUpdate, showAdd]);
   return (
     <div className="taskBoard">
       <TaskColumn tasks={todoTasks} />

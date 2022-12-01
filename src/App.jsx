@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { API } from "./api";
 import "./App.css";
 import EditTask from "./components/EditTask";
 import ForgetPass from "./components/ForgetPass";
@@ -13,13 +14,14 @@ import { MyContext } from "./context";
 
 function App() {
   const navigate = useNavigate();
-  const { user, setUser, setIsAuthenticated } = useContext(MyContext);
+  const { user, setUser, setIsAuthenticated, isAuthenticated } =
+    useContext(MyContext);
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setUser(JSON.parse(localStorage.getItem("user")));
       setIsAuthenticated(true);
     } else navigate("/login");
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div className="App">
@@ -31,7 +33,7 @@ function App() {
         <Route path="/forget-password" element={<ForgetPass />} />
         <Route path="/reset-password/:id" element={<ResetPass />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
-        <Route path="/tasks/edit/:id" element={<EditTask />} />
+        {/* <Route path="/tasks/edit/:id" element={<EditTask />} /> */}
       </Routes>
     </div>
   );
