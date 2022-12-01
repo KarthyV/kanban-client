@@ -1,10 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Modal, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { API } from "../api";
 import { MyContext } from "../context";
 
 const MobileNav = (props) => {
-  const { darkMode, setDarkMode, setIsAdmin } = useContext(MyContext);
+  const { darkMode, setDarkMode, setIsAdmin, user, setUser, setShowMobile } =
+    useContext(MyContext);
   const navigate = useNavigate();
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -17,9 +19,10 @@ const MobileNav = (props) => {
       },
     });
     if (res.status == 200) {
+      setShowMobile(false);
+      setIsAdmin(false);
       setUser("");
       localStorage.clear();
-      setIsAdmin(false);
       navigate("/login");
     }
   };
