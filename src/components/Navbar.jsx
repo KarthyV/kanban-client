@@ -7,8 +7,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MobileNav from "./MobileNav";
 
 const Navbar = () => {
-  const { showAdd, setShowAdd, darkMode, user, showMobile, setShowMobile } =
-    useContext(MyContext);
+  const {
+    showAdd,
+    setShowAdd,
+    darkMode,
+    user,
+    showMobile,
+    setShowMobile,
+    setIsAdmin,
+  } = useContext(MyContext);
 
   const { pathname } = useLocation();
   const navigate = useNavigate();

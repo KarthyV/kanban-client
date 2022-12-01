@@ -5,7 +5,8 @@ import { API } from "../api";
 import { MyContext } from "../context";
 
 const Sidebar = () => {
-  const { user, setUser, darkMode, setDarkMode } = useContext(MyContext);
+  const { user, setUser, darkMode, setDarkMode, setIsAdmin } =
+    useContext(MyContext);
   const navigate = useNavigate();
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const Sidebar = () => {
     if (res.status == 200) {
       setUser("");
       localStorage.clear();
+      setIsAdmin(false);
       navigate("/login");
     }
   };
