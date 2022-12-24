@@ -68,13 +68,20 @@ const Login = () => {
           />
           <p> {errors.password && touched.password ? errors.password : null}</p>
           <p className="forget_pass">
-            <Link to="/forget-password">Forget Password?</Link>
+            <Link
+              style={{ textDecoration: "none", color: "#635FC7" }}
+              to="/forget-password"
+            >
+              Forget Password?
+            </Link>
           </p>
         </div>
         <button type="submit">Login</button>
       </form>
       <p>
-        <Link to="/signup">Don't have an account? Click Here!</Link>
+        <Link style={{ textDecoration: "none", color: "#635FC7" }} to="/signup">
+          Don't have an account? Click Here!
+        </Link>
       </p>
     </div>
   );

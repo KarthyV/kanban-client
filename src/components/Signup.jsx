@@ -71,7 +71,9 @@ const SignUp = () => {
         <button type="submit">SignUp</button>
       </form>
       <p>
-        <Link to="/login">Already have an account? Login</Link>
+        <Link style={{ textDecoration: "none", color: "#635FC7" }} to="/login">
+          Already have an account? Login
+        </Link>
       </p>
     </div>
   );
